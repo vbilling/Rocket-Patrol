@@ -9,11 +9,39 @@ class Rocket extends Phaser.GameObjects.Sprite {
         this.moveSpeed = 2; // pixels per frame
 
         // add rocket sfx
-        this.sfxRocket = scene.sound.add('sfx_rocket');
+        this.sfxRocket = scene.sound.add('magic_shot');
+        let fireConfig = {
+            fontFamily: 'American Typewriter',
+            fontSize: '26px',
+            color: 'white', //#ffb5f9
+            align: 'center',
+            padding: {
+                top: 5,
+                bottom: 4,
+                right: 10,
+            },
+
+        }
+        this.fire_text = scene.add.text(160, 55, 'FIRE', fireConfig).setOrigin(0);
+        console.log(this.fire_text);
+        this.fire_text.setAlpha(0);
     }
+
+
     update() {
+        //alpha of fire text
+
         // left/right movement
         if(!this.isFiring) {
+            if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
+                this.fire_text.setAlpha(0);
+                this.x -= this.moveSpeed;
+            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
+                this.fire_text.setAlpha(1);
+                this.x += this.moveSpeed;
+            }
+        }
+        else if(this.isFiring){
             if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
             } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
@@ -22,6 +50,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
         }
         //fire button
         if(Phaser.Input.Keyboard.JustDown(keyF) && !this.isFiring) {
+            this.fire_text.setAlpha(1);
             this.isFiring = true;
             this.sfxRocket.play();
         }
@@ -37,6 +66,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
 
     // reset rocket to "ground"
     reset() {
+        this.fire_text.setAlpha(0);
         this.isFiring = false;
         this.y = game.config.height - borderUISize - borderPadding;
     }
