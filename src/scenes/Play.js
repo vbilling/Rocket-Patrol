@@ -33,12 +33,12 @@ class Play extends Phaser.Scene {
         // parameters for rectangle(x, y, width, height, color)
         // ("this" refers to the scene object)
         // green UI background 
-        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0xffb5f9).setOrigin(0, 0);
+        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0xff59b8).setOrigin(0, 0);
         //white boarders
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0,0);
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
-        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0,0);
-        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
+        //this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0,0);
+        //this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
 
         //add rocket (p1)
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'full_strawberry').setOrigin(0.5, 0);
@@ -79,12 +79,29 @@ class Play extends Phaser.Scene {
         
 
         // cat munching animation
-        //this.anims.create({
-            //key: 'munch',
-            //frames: this.anims.generateFrameNumbers('cat01', {start: 0, end: 96, first: 0}),
-            //frameRate: 2,
-            //repeat: 3,
-        //}); 
+        this.anims.create({
+            key: 'munch1',
+            frames: this.anims.generateFrameNumbers('cat01', {start: 0, end: 1, first: 0}),
+            frameRate: 2.5,
+            repeat: -1
+        }); 
+        this.ship01.anims.play('munch1');
+
+        this.anims.create({
+            key: 'munch2',
+            frames: this.anims.generateFrameNumbers('cat02', {start: 0, end: 1, first: 0}),
+            frameRate: 2.05,
+            repeat: -1
+        }); 
+        this.ship02.anims.play('munch2');
+        
+        this.anims.create({
+            key: 'munch3',
+            frames: this.anims.generateFrameNumbers('cat03', {start: 0, end: 1, first: 0}),
+            frameRate: 2.1,
+            repeat: -1
+        }); 
+        this.ship03.anims.play('munch3');
 
         // initialize score
         this.p1Score = 0;
@@ -103,9 +120,9 @@ class Play extends Phaser.Scene {
         }
 
         let gameoverConfig = {
-            fontFamily: 'Luminari Regular',
-            fontSize: '32px',
-            //backgroundColor: 'white',
+            fontFamily: 'Arial Black', //Luminari Regular
+            fontSize: '28px',
+            backgroundColor: '#ff59b8',
             color: 'white',
             align: 'right',
             stroke: 'black',
@@ -114,7 +131,7 @@ class Play extends Phaser.Scene {
                 top: 5,
                 bottom: 5,
             },
-            //fixedWidth: 100
+            
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*1.7, this.p1Score, scoreConfig);
         let fireConfig = {
@@ -136,14 +153,15 @@ class Play extends Phaser.Scene {
         // time.delayedCall(the time that will elapse before the callback function fires, the callback function itself, any arguments we want to pass to the callback(null), the callback context ("this" is the Play scene))
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', gameoverConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', gameoverConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2.4, 'GAME OVER', gameoverConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 30, 'Press (R) to Restart or ← for Menu', gameoverConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
 
     }
     // code that is executed every frame of the game
     update() { 
+        //this.ship01.anims.play('munch');
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();

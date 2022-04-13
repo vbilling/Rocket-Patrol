@@ -22,8 +22,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
             },
 
         }
-        this.fire_text = scene.add.text(160, 55, 'FIRE', fireConfig).setOrigin(0);
-        console.log(this.fire_text);
+        this.fire_text = scene.add.text(160, 55, 'FLING!', fireConfig).setOrigin(0);
         this.fire_text.setAlpha(0);
     }
 
