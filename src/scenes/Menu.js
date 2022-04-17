@@ -13,6 +13,9 @@ class Menu extends Phaser.Scene {
         this.load.audio('magic', './assets/magic.wav');
         this.load.audio('magic_shot', './assets/magic_shot.wav');
 
+        //background music
+        this.load.audio('background_music', './assets/backgroundMusic.wav');
+
         // background
         this.load.image('strawberry_field', './assets/strawberry_field.png');
         //images for decoration

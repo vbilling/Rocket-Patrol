@@ -10,7 +10,6 @@ class Play extends Phaser.Scene {
         this.load.image('spaceship', './assets/spaceship.png');
         this.load.image('starfield', './assets/strawberry_field.png');
 
-        
         // load sprite sheet
         this.load.spritesheet('explosion', './assets/explosion01.png', {frameWidth: 128, frameHeight: 64, startFrame: 0, endFrame: 9});
         this.load.spritesheet('explosion02', './assets/explosion02.png', {frameWidth: 128, frameHeight: 64, startFrame: 0, endFrame: 9});
@@ -27,6 +26,11 @@ class Play extends Phaser.Scene {
     }
     //happens once when the scene is created
     create() {
+        //background music
+        var music = this.sound.add('background_music');
+        music.setLoop(true);
+        music.play();
+
         //place tile sprite - add.tileSprite(x, y, width, height, key string for image)
         //defines is at "this.starfield" because we need the scope to be anywhere in the scene not just the method it is defined in
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);

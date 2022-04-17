@@ -14,7 +14,6 @@ class Spaceship extends Phaser.GameObjects.Sprite {
         this.speedTimer -= 10;
         if (this.speedTimer == 30000) {
             this.moveSpeed += 2;
-            console.log('this.moveSpeed:', this.moveSpeed);
         }
         
         // move spaceship left
