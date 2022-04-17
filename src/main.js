@@ -1,4 +1,15 @@
 
+// POINT BREAK DOWN
+// Redesign the game's artwork, UI, and sound to change its theme/aesthetic (to something other than sci-fi) (60)
+// Create a new animated sprite for the Spaceship enemies (10)
+// Create 4 new explosion SFX and randomize which one plays on impact (10)
+// Allow the player to control the Rocket after it's fired (5)
+// Implement the speed increase that happens after 30 seconds in the original game (5)
+// Add your own (copyright-free) background music to the Play scene (5)
+// Implement the 'FIRE' UI text from the original game (5)
+
+
+
 let config = {
     type: Phaser.AUTO,
     width: 640,
